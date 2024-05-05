@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "floatingpanel",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SCENEE/FloatingPanel",
+      "state" : {
+        "revision" : "8f2be39bf49b4d5e22bbf7bdde69d5b76d0ecd2a",
+        "version" : "2.8.2"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage",
+      "state" : {
+        "revision" : "f6afa0132961d593f07970d84e2d8b588c29ea04",
+        "version" : "5.19.1"
+      }
+    }
+  ],
+  "version" : 2
+}
