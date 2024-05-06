@@ -8,6 +8,32 @@
 import Foundation
 import UIKit
 
+//MARK: NOTIFICATION
+extension Notification.Name {
+    static let didAddToWatchlist = Notification.Name("didAddToWatchlist")
+}
+
+//MARK: Number Formatter
+extension NumberFormatter {
+    static let percentageFormatter : NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = .current
+        formatter.numberStyle = .percent
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+    
+    static let numberFormatter : NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = .current
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
+}
+
+
+
 //MARK: UI Image View
 extension UIImageView {
     func setImage(from url: URL?) {
@@ -22,8 +48,6 @@ extension UIImageView {
             }
             task.resume()
         }
-        
-       
     }
 }
 
@@ -35,6 +59,16 @@ extension String {
     static func string(from timeInterval: TimeInterval) -> String {
         let date = Date(timeIntervalSince1970: timeInterval)
         return DateFormatter.prettyDateFormatter.string(from: date)
+    }
+    
+    static func persentage(from double: Double) -> String {
+        let formatter = NumberFormatter.percentageFormatter
+        return formatter.string(from: NSNumber(value: double)) ?? "\(double)"
+    }
+    
+    static func formatted(number: Double) -> String {
+        let formatter = NumberFormatter.numberFormatter
+        return formatter.string(from: NSNumber(value: number)) ?? "\(number)"
     }
 }
 
@@ -55,17 +89,12 @@ extension DateFormatter {
 
 //MARK: - Add Subview
 extension UIView {
-    /**
-     Adds multiple subviews to the current view.
-     - Parameter view: A variable number of UIView objects to be added as subviews.
-     The `...` after the `UIView` parameter in the function signature indicates that the parameter accepts a variadic number of arguments of type `UIView`. This means you can pass in multiple `UIView` objects separated by commas, and they will be treated as an array of `UIView` objects inside the function. This allows you to conveniently pass any number of views to the `addSubviews` function without having to explicitly define an array.
-     */
-    func addSubviews(_ view: UIView...){
-        // Iterates through each UIView passed as a parameter and adds it as a subview
-        view.forEach {
-            self.addSubviews($0)
-        }
-    }
+//    func addSubviews(_ view: UIView...){
+//        // Iterates through each UIView passed as a parameter and adds it as a subview
+//        view.forEach {
+//            self.addSubviews($0)
+//        }
+//    }
 
     
 }

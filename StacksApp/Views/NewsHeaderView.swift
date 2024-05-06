@@ -27,7 +27,7 @@ class NewsHeaderView: UITableViewHeaderFooterView {
         return lable
     }()
     
-    private let button: UIButton = {
+    let button: UIButton = {
         let button = UIButton()
         button.setTitle("+ Watchlist", for: .normal)
         button.backgroundColor = .systemBlue
@@ -38,8 +38,6 @@ class NewsHeaderView: UITableViewHeaderFooterView {
         button.sizeToFit()
         return button
     }()
-    
-    
 
     //MARK: -INIT
     override init(reuseIdentifier: String?) {
@@ -57,6 +55,9 @@ class NewsHeaderView: UITableViewHeaderFooterView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        lable.sizeToFit()
+        button.sizeToFit()
+        
         lable.frame = CGRect(x: 14, y: 0, width: contentView.width - 28, height: contentView.height)
         
         button.frame = CGRect(
@@ -75,11 +76,9 @@ class NewsHeaderView: UITableViewHeaderFooterView {
         delegate?.newsHeaderViewDidTabButton(self)
     }
     
-    
     //MARK: -Public
     public func configure(with viewModel: ViewModal) {
         lable.text = viewModel.title
         button.isHidden = !viewModel.shouldShowAddButton
     }
-    
 }

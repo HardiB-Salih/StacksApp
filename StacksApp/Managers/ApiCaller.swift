@@ -48,7 +48,7 @@ final class ApiCaller {
                 completion: complition)
         case.company(let symbol):
             let today = Date()
-            let oneMonthBack = today.addingTimeInterval(-(Constants.day * 3))
+            let oneMonthBack = today.addingTimeInterval(-(Constants.day * 30))
             request(
                 url: url(
                     for: .companyNews,
@@ -120,6 +120,19 @@ final class ApiCaller {
         }
     }
 
+    
+    public func financialMatrics(
+        for symbol: String,
+        completion: @escaping (Result<FinancialMatricsResponse, Error>) -> Void
+    ) {
+        request(
+            url:
+                url(
+                    for: .financials,
+                    queryParams: ["symbol" : symbol, "metric" : "all"]),
+            expecting: FinancialMatricsResponse.self,
+            completion: completion )
+    }
 
 
     
@@ -129,6 +142,7 @@ final class ApiCaller {
         case topStories = "news"
         case companyNews = "company-news"
         case marketData = "stock/candle"
+        case financials = "stock/metric"
     }
     
     private enum APIError: Error {
@@ -154,7 +168,7 @@ final class ApiCaller {
             
             // Convert query item to suffix string
             urlString += "?" + queryItem.map { "\($0.name)=\($0.value ?? "")"}.joined(separator: "&")
-            print(urlString)
+//            print(urlString)
             return URL(string: urlString)
     }
     
